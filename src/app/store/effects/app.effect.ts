@@ -11,32 +11,34 @@ export class AppEffects {
 
   constructor(private messageService: MessageServiceService) {}
 
-   messageAdd$ = createEffect(() => {
-    return (
-      this.actions$.pipe(
-        ofType(actions.addMessage),
-        switchMap((action) => from(this.messageService.createItem(action))),
-        catchError((err, caught$) =>
-          of(actions.messageFailure({ message: 'Error!' }))
-        )
-      ),
-      map((messageState) => actions.messageSuccess(messageState))
-    );
-  });
-
+  messageAdd$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.getMessages),
+      exhaustMap((action) => {
+        console.log('EFFECT CALL: ' + action);
+        const observable$ = from(this.messageService.createItem(action));
+        return observable$.pipe(
+          map((data) => {
+            console.log('EFFECT MAP: ID' + action, data);
+            return actions.messageSuccess(data);
+          })
+        );
+      })
+    )
+  );
 
   messageGet$ = createEffect(() =>
-  this.actions$.pipe(
-    ofType(actions.getMessages),
-    switchMap((action) => {
-      console.log('EFFECT CALL: ' + action);
-      return this.messageService.getItem().pipe(
-        map((data) => {
-          console.log('EFFECT MAP: ID' + action, data);
-          return actions.messageSuccess(data);
-        })
-      );
-    })
-  )
-);
+    this.actions$.pipe(
+      ofType(actions.getMessages),
+      switchMap((action) => {
+        console.log('EFFECT CALL: ' + action);
+        return this.messageService.getItem().pipe(
+          map((data) => {
+            console.log('EFFECT MAP: ID' + action, data);
+            return actions.messageSuccess(data);
+          })
+        );
+      })
+    )
+  );
 }
