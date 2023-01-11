@@ -1,6 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
+import { Store } from '@ngrx/store';
+import { Subject, takeUntil } from 'rxjs';
+import { MessageData } from 'src/app/shared/models/message';
 import { MessageServiceService } from 'src/app/shared/services/message-service.service';
+import * as fromRoot from 'src/app/store';
+import { getMessages } from 'src/app/store/actions/app.actions';
 @Component({
   selector: 'app-message-list',
   templateUrl: './message-list.component.html',
@@ -8,31 +13,42 @@ import { MessageServiceService } from 'src/app/shared/services/message-service.s
 })
 export class MessageListComponent {
   dataSource :any=[];
-  displayedColumns: string[] = ['id', 'name', 'message'];
+  displayedColumns: string[] = ['id', 'name', 'message','datatime'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
-  isLoading: boolean = false;
+  isLoading: boolean = true;
+  destroy$: Subject<boolean> = new Subject<boolean>();
+  messageData : MessageData; 
 
   constructor(
     private messageService: MessageServiceService,
-  ) {}
-
-  ngOnInit() {
-    this.isLoading = true;
-    this.loadMessageList();
+    private store: Store<MessageData>
+  ) {
+    this.store.select(fromRoot.messagesSelector).pipe(
+      takeUntil(this.destroy$)
+    ).subscribe(data => {
+      if (data.isLoadingSuccess && data.MessageData) {
+        this.dataSource = Object.values(data.MessageData);
+        this.dataSource.pop();
+      }
+      this.isLoading = false;
+    });
+    this.store.dispatch(getMessages(this.messageData));
   }
+
+  
  
   loadMessageList() {
-    this.messageService.getItem().subscribe({
-      next: (res: any) => {
-        this.isLoading = false;
-        this.dataSource = res;
-      },
-      error: (err) => {
-        this.isLoading = false;
-        console.error(err);
+    // this.messageService.getItem().subscribe({
+    //   next: (res: any) => {
+    //     this.isLoading = false;
+    //     this.dataSource = res;
+    //   },
+    //   error: (err) => {
+    //     this.isLoading = false;
+    //     console.error(err);
         
-      },
-    });
+    //   },
+    // });
   }
   announceSortChange(sortState: Sort) {
     this.isLoading = true;
