@@ -31,14 +31,16 @@ export class MessageAddComponent {
       takeUntil(this.destroy$)
     ).subscribe(data => {
       console.log('data::::', data);
-      if (data.isLoadingSuccess && data.MessageData) {
-        this.isFormSubmitting = false;
-        this.succesMessage();
 
-        setTimeout(() => {
-          this.dialogRef.close();
-        }, 500);
-      }
+      // TODO: 
+      // if (data.isLoadingSuccess && data.MessageData) {
+      //   this.isFormSubmitting = false;
+      //   this.succesMessage();
+
+      //   setTimeout(() => {
+      //     this.dialogRef.close();
+      //   }, 500);
+      // }
     });
   }
   
