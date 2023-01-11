@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "angulartest001-48267": {
+      "hosting": {
+        "AngularTest001": [
+          "angulartest001-48267"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "angulartest001-48267"
+  }
+}
