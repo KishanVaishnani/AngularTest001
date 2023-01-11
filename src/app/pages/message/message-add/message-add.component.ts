@@ -31,7 +31,7 @@ export class MessageAddComponent {
     this.isFormSubmitting = true;
     let newId: any = Guid.create();
 
-    this.messageData.id = newId;
+    this.messageData.id = newId['value'];
     this.messageService.createItem(this.messageData).then(res => {
       if (res.id != null) {
         this.isFormSubmitting = false;
