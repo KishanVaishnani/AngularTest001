@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <span class="fill-remaining-space">
+    <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <span (mouseleave)="menuTrigger.closeMenu()">
+        <button mat-menu-item [routerLink]="['/']">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/message']">
+          <mat-icon>message</mat-icon>
+          <span>Message</span>
+        </button>
+      </span>
+    </mat-menu>
+  </span>
+  <span class="fill-remaining-space">AngularTest001</span>
+</mat-toolbar>
