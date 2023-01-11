@@ -1,0 +1,28 @@
+.page-wrapper {
+  display: flex;
+  align-items: stretch;
+}
+
+.content {
+  width: 100%;
+  padding: 0px 0 0 0px;
+  transition: all 0.3s;
+}
+.content-area{
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  padding: 5rem 0rem 0rem 0rem;
+}
+.content-wrap{
+  display: flex;
+  flex: 1;
+  padding: 1.25rem;
+  flex-direction: column;
+}
+.content-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
