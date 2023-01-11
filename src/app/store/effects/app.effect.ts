@@ -11,21 +11,23 @@ export class AppEffects {
 
   constructor(private messageService: MessageServiceService) {}
 
-  messageAdd$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(actions.getMessages),
-      exhaustMap((action) => {
-        console.log('EFFECT CALL: ' + action);
-        const observable$ = from(this.messageService.createItem(action));
-        return observable$.pipe(
-          map((data) => {
-            console.log('EFFECT MAP: ID' + action, data);
-            return actions.messageSuccess(data);
-          })
-        );
-      })
-    )
-  );
+  // messageAdd$ = createEffect(() =>
+  //   this.actions$.pipe(
+  //     ofType(actions.getMessages),
+  //     exhaustMap((action) => {
+  //       console.log('EFFECT CALL: ' + action);
+  //       debugger
+  //       const observable$ = from(this.messageService.createItem(action));
+  //       return observable$.pipe(
+  //         map((data) => {
+  //           debugger
+  //           console.log('EFFECT MAP: ID' + action, data);
+  //           return actions.messageSuccess(data);
+  //         })
+  //       );
+  //     })
+  //   )
+  // );
 
   messageGet$ = createEffect(() =>
     this.actions$.pipe(
