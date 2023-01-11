@@ -11,6 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { DialogModule } from '@angular/cdk/dialog';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   exports: [
@@ -26,6 +27,7 @@ import { DialogModule } from '@angular/cdk/dialog';
     MatToolbarModule,
     DialogModule,
     MatFormFieldModule,
+    MatSortModule
   ],
 })
 export class MaterialModule {}
