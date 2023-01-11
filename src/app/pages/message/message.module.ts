@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { MessageRoutingModule } from './message-routing.module';
@@ -12,6 +12,13 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { FormsModule } from '@angular/forms';
 
+// ngrx related imports
+import { StoreModule } from '@ngrx/store';
+import { metaReducers, reducers } from 'src/app/store';
+import { AppEffects } from 'src/app/store/effects/app.effect';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 @NgModule({
   declarations: [
     LayoutComponent,
@@ -24,7 +31,13 @@ import { FormsModule } from '@angular/forms';
     MessageRoutingModule,
     MaterialModule,
     AngularFirestoreModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+
+
+     // ngrx related imports
+    StoreModule.forFeature("messagesstate",reducers),
+    EffectsModule.forFeature([AppEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers:[
     MessageServiceService

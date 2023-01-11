@@ -1,5 +1,5 @@
-export interface MessageData {
-  id: string,
+export class MessageData {
+  id: string;
   name: string;
   message: string;
 }
