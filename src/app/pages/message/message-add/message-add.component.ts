@@ -54,13 +54,21 @@ export class MessageAddComponent {
   }
 
   onSubmit() {
-   
     let newId: any = Guid.create();
 
     this.messageData.id = newId['value'];
     if (this.ref_message.valid && this.ref_name.valid) {
       this.isFormSubmitting = true;
-      this.store.dispatch(addMessage(this.messageData));
+      //this.store.dispatch(addMessage(this.messageData));
+
+      this.messageService.createItem(this.messageData).then(() => {
+        this.isFormSubmitting = false;
+        this.succesMessage();
+
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 500);
+      });
     }
   }
 
