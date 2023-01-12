@@ -19,12 +19,12 @@ export const getMessageFailure = createAction(
 
 export const addMessage = createAction(
   '[MessageModule] add new message to db',
-  props<MessageData>()
+  props<{id: string, name: string, message:string, datetime: string}>()
 );
 
 export const addMessageSuccess = createAction(
   '[MessageModule] new message added succesfully',
-  props<any>()
+  props<{message: string}>()
 )
 
 export const addMessageFailure = createAction(

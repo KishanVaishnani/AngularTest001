@@ -17,7 +17,7 @@ export class AppEffects {
         console.log('EFFECT CALL: ' + action);
         return this.messageService.createItem(action).then((data) => {
           console.log('EFFECT MAP: ID' + action, data);
-          return actions.addMessageSuccess(data);
+          return actions.addMessageSuccess({ message:" Saved!"});
         });
       })
     )

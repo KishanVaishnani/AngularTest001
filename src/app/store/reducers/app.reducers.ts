@@ -5,35 +5,43 @@ import * as storage from '../state/app.store';
 
 export interface State {
   messageData?: MessageData;
-  isLoading?: boolean;
-  isLoadingSuccess?: boolean;
-  isLoadingFailure?: boolean;
+  addMessageData?: MessageData;
+  isGetLoading?: boolean;
+  isGetLoadingSuccess?: boolean;
+  isGetLoadingFailure?: boolean;
+  isAddLoading?: boolean;
+  isAddLoadingSuccess?: boolean;
+  isAddLoadingFailure?: boolean;
 }
 
 export const initialState: State = {
   messageData: storage.getItem('messageData').messageData,
-  isLoading: false,
-  isLoadingSuccess: false,
-  isLoadingFailure: false
+  addMessageData: null,
+  isGetLoading: false,
+  isGetLoadingSuccess: false,
+  isGetLoadingFailure: false,
+  isAddLoading: false,
+  isAddLoadingSuccess: false,
+  isAddLoadingFailure: false
 };
 
 const messageReducer = createReducer(
   initialState,
 
   // get message
-  on(actions.getMessages, (state, messages) => ({...state, messageData: messages, isLoading: true})),
+  on(actions.getMessages, (state, messages) => ({...state, messageData: messages, isGetLoading: true})),
   on(actions.getMessageSuccess, (state, result) =>
   {
     return {
-      ...state, messageData: result, isLoading: false, isLoadingSuccess: true
+      ...state, messageData: result, isGetLoading: false, isGetLoadingSuccess: true
     }
   }),
-  on(actions.getMessageFailure, (state, result) => ({ messageData: result, isLoading: false, isLoadingSuccess: true})),
+  on(actions.getMessageFailure, (state, result) => ({ messageData: result, isGetLoading: false, isLoadingFailure: true})),
   
   // add message
-  on(actions.addMessage, (state, messages) => ({ messageData:messages, isLoading: true})),
-  on(actions.addMessageSuccess, (state, result) => ({ isLoading: false, isLoadingSuccess: true})),
-  on(actions.addMessageFailure, (state, result) => ({ messageData: result, isLoading: false, isLoadingSuccess: true})),
+  on(actions.addMessage, (state, messages) => ({ addMessageData:messages, isAddLoading: true})),
+  on(actions.addMessageSuccess, (state, result) => ({ isAddLoading: false, isAddLoadingSuccess: true})),
+  on(actions.addMessageFailure, (state, result) => ({ addMessageData: result, isAddLoadingoading: false, isAddLoadingFailure: true})),
 );
 
 export function reducer(state: State | undefined, action: Action): any {
@@ -42,15 +50,15 @@ export function reducer(state: State | undefined, action: Action): any {
 
 export const messageAddState = (state: State) => {
   return {
-    MessageData: state?.["messages"]?.messageData,
-    isLoading: state?.["messages"]?.isLoading,
-    isLoadingSuccess: state?.["messages"]?.isLoadingSuccess
+    IsAddLoading: state?.["messages"]?.isAddLoading,
+    isAddLoadingSuccess: state?.["messages"]?.isAddLoadingSuccess
   }
 };
 
 export const getMessageState = (state: State) => {
   return {
     MessageData: state?.["messages"]?.messageData,
-    isLoadingSuccess: state?.["messages"]?.isLoadingSuccess
+    IsGetLoading: state?.["messages"]?.isGetLoading,
+    IsGetLoadingSuccess: state?.["messages"]?.isGetLoadingSuccess
   }
 };

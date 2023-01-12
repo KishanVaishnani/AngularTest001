@@ -28,7 +28,7 @@ export class LayoutComponent {
       .pipe(takeUntil(this.destroy$))
       .subscribe((data) => {
         console.log('data::::', data);
-        if (data.isLoadingSuccess && data.MessageData) {
+        if (data.isAddLoadingSuccess) {
           this.dialog.closeAll();
           this.succesMessage();
         }

@@ -12,41 +12,32 @@ import { getMessages } from 'src/app/store/actions/app.actions';
   styleUrls: ['./message-list.component.scss'],
 })
 export class MessageListComponent {
-  dataSource :any=[];
-  displayedColumns: string[] = ['id', 'name', 'message','datatime'];
+  dataSource: any = [];
+  displayedColumns: string[] = ['id', 'name', 'message', 'datatime'];
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   isLoading: boolean = true;
   destroy$: Subject<boolean> = new Subject<boolean>();
-  messageData : MessageData; 
+  messageData: MessageData;
 
   constructor(
     private messageService: MessageServiceService,
     private store: Store<MessageData>
   ) {
-    this.store.select(fromRoot.getMessagesSelector).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(data => {
-      if (data.isLoadingSuccess && data.MessageData) {
-        this.dataSource = Object.values(data.MessageData);
-        this.dataSource.pop();
-      }
-      this.isLoading = false;
-    });
-    this.store.dispatch(getMessages(this.messageData));
+    this.store
+      .select(fromRoot.getMessagesSelector)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data) => {
+        if (data.IsGetLoadingSuccess && data.MessageData) {
+          this.dataSource = Object.values(data.MessageData);
+          this.dataSource.pop();
+        }
+        this.isLoading = false;
+      });
+    this.loadMessageList();
   }
- 
+
   loadMessageList() {
-    // this.messageService.getItem().subscribe({
-    //   next: (res: any) => {
-    //     this.isLoading = false;
-    //     this.dataSource = res;
-    //   },
-    //   error: (err) => {
-    //     this.isLoading = false;
-    //     console.error(err);
-        
-    //   },
-    // });
+    this.store.dispatch(getMessages(this.messageData));
   }
   announceSortChange(sortState: Sort) {
     this.isLoading = true;
