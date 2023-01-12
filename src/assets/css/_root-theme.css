@@ -12,7 +12,7 @@
   display: flex;
   flex: 1;
   flex-direction: row;
-  padding: 5rem 0rem 0rem 0rem;
+  padding: 0rem 0rem 0rem 0rem;
 }
 .content-wrap{
   display: flex;
