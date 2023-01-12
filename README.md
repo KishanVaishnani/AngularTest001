@@ -1,34 +1,88 @@
-# AngularTest001
+# AngularTest001 Developer Docs
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.5.
+The UI is built with Angular and connects to the Firebase API for access to DB. It gets deployed to Firebase `https://angulartest001-48267.web.app/`.
 
-## Development server
+_NOTE: Read top level README up one directory to get overall info. This README is specific to AngularTest001 UI._
 
-Run `npm i` for install all dependencies
+#### Landscape
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+A few key points so you know your way around.
 
-## Configuration
+- Entry Point: **src/app/app.component.ts**
+- Configuration: is in **src/environments** folder
 
-All configuration related to Firestore are added inside `environment.ts` file
-## Code scaffolding
+## Configure It
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Look at appropriate src/environment/\*.ts file.
 
-## Build
+- Developer Machine: environment.ts
+- Production: environment.prod.ts (used when 'production' configuration is used in build. Refer to script: build:production in package.json)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Run It
+    $ npm install
+    $ npm run start
+## Debug It - in VSCode
 
-## Running unit tests
+1. Google Chrome already installed
+2. Install the Debugger for Chrome extension in VS Code
+   More info - https://marketplace.visualstudio.com/items?itemName=msjsdiag.debugger-for-chrome
+3. Create a launch.json config file (by clicking the gear icon in the Debug view)
+4. Set an appropriate config spec in the .vscode/launch.json file (example below)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}
+```
 
-## Running end-to-end tests
+5. Set breakpoints in the editor
+6. Launch the Angular app separate from the debugger (such as by running “ng serve” or “npm start” from the command line)
+7. Run the VS Code debugger “launch” job against the app (by clicking the green arrow in the Debug view).
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Production Build
 
-## Further help
+Open `src/environments/environment.ts` and define values in provided parameters
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+`UPDATE PARAMETERS AS PER ENVIRONMENT`
 
-Project will be host on `https://angulartest001-48267.web.app/`
+```
+firebase: {
+    projectId: 'angulartest001-48267',
+    appId: '1:551567410857:web:95b40d149509fecaea8bb8',
+    storageBucket: 'angulartest001-48267.appspot.com',
+    apiKey: 'AIzaSyApuETxVF5g7mMDfrkgQYjuZK7un4fPpE8',
+    authDomain: 'angulartest001-48267.firebaseapp.com',
+    messagingSenderId: '551567410857',
+    measurementId: 'G-LT3DYRMEWC',
+}
+```
+
+Run `npm run build` for generate build
+
+## STEPS TO DEPLOYMENT
+
+**Pre-requirement**
+
+Install Firebase Tools globally in machine `npm install -g firebase-tools`
+
+_Steps to Follow_
+
+1. firebase login
+2. firebase init
+3. follow CLI & configure it
+4. firebase deploy
+
+# Resources
+
+- [Configuring Dependency Injection in Angular](https://codecraft.tv/courses/angular/dependency-injection-and-providers/configuring/)
+
+- [Deployment step by step](https://www.c-sharpcorner.com/article/how-to-deploy-and-host-an-angular-application-on-firebase/)
