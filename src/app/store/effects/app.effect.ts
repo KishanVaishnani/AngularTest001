@@ -1,6 +1,5 @@
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { from, of } from 'rxjs';
 import { MessageServiceService } from 'src/app/shared/services/message-service.service';
 import * as actions from '../actions/app.actions';
 import { map, exhaustMap, catchError, switchMap } from 'rxjs/operators';
@@ -11,25 +10,18 @@ export class AppEffects {
 
   constructor(private messageService: MessageServiceService) {}
 
-  // TODO: 
-  
-  // messageAdd$ = createEffect(() =>
-  //   this.actions$.pipe(
-  //     ofType(actions.getMessages),
-  //     exhaustMap((action) => {
-  //       console.log('EFFECT CALL: ' + action);
-  //       debugger
-  //       const observable$ = from(this.messageService.createItem(action));
-  //       return observable$.pipe(
-  //         map((data) => {
-  //           debugger
-  //           console.log('EFFECT MAP: ID' + action, data);
-  //           return actions.messageSuccess(data);
-  //         })
-  //       );
-  //     })
-  //   )
-  // );
+  messageAdd$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(actions.addMessage),
+      switchMap((action) => {
+        console.log('EFFECT CALL: ' + action);
+        return this.messageService.createItem(action).then((data) => {
+          console.log('EFFECT MAP: ID' + action, data);
+          return actions.addMessageSuccess(data);
+        });
+      })
+    )
+  );
 
   messageGet$ = createEffect(() =>
     this.actions$.pipe(
@@ -39,7 +31,7 @@ export class AppEffects {
         return this.messageService.getItem().pipe(
           map((data) => {
             console.log('EFFECT MAP: ID' + action, data);
-            return actions.messageSuccess(data);
+            return actions.getMessageSuccess(data);
           })
         );
       })

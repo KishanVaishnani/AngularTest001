@@ -35,9 +35,14 @@ export function debug(reducer: ActionReducer<any>): ActionReducer<any> {
 }
 export const metaReducers: MetaReducer<State>[] = !environment.production ? [debug, localStorageSyncReducer] : [localStorageSyncReducer];
 
-export const getMessagesState = createFeatureSelector<AppReducer.State>('messagesstate');
+export const messagesState = createFeatureSelector<AppReducer.State>('messagesstate');
 
 export const messagesSelector = createSelector(
-  getMessagesState,
+  messagesState,
   AppReducer.messageAddState
+);
+
+export const getMessagesSelector = createSelector(
+  messagesState,
+  AppReducer.getMessageState
 );

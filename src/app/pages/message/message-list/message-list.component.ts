@@ -23,7 +23,7 @@ export class MessageListComponent {
     private messageService: MessageServiceService,
     private store: Store<MessageData>
   ) {
-    this.store.select(fromRoot.messagesSelector).pipe(
+    this.store.select(fromRoot.getMessagesSelector).pipe(
       takeUntil(this.destroy$)
     ).subscribe(data => {
       if (data.isLoadingSuccess && data.MessageData) {
@@ -34,8 +34,6 @@ export class MessageListComponent {
     });
     this.store.dispatch(getMessages(this.messageData));
   }
-
-  
  
   loadMessageList() {
     // this.messageService.getItem().subscribe({

@@ -8,18 +8,18 @@ import { map, Observable } from 'rxjs';
 export class MessageServiceService {
   constructor(private firestore: AngularFirestore) {}
 
-  createItem(data) {
-    return this.firestore
-      .collection('messages')
-      .add(data)
-      .then(
-        (res) => {
-          return res;
-        },
-        (err) => {
-          return err;
-        }
-      );
+  createItem(data): Promise<any> {
+    return new Promise<any>((resolve, reject) => {
+      this.firestore
+        .collection('messages')
+        .add(data)
+        .then(
+          (res) => {
+            resolve(res);
+          },
+          (err) => reject(err)
+        );
+    });
   }
 
   getItem() {

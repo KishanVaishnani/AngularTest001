@@ -7,17 +7,27 @@ export const getMessages = createAction(
   props<MessageData>()
 );
 
+export const getMessageSuccess = createAction(
+  '[MessageModule] get messages  succesfully',
+  props<any>()
+)
+
+export const getMessageFailure = createAction(
+  '[MessageModule] get message failed',
+  props<any>()
+)
+
 export const addMessage = createAction(
-  '[MessageModule] new message add',
+  '[MessageModule] add new message to db',
   props<MessageData>()
 );
 
-export const messageSuccess = createAction(
+export const addMessageSuccess = createAction(
   '[MessageModule] new message added succesfully',
   props<any>()
 )
 
-export const messageFailure = createAction(
+export const addMessageFailure = createAction(
   '[MessageModule] new message failed to create',
-  props<{message: string}>()
+  props<any>()
 )

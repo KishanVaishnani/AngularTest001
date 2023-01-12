@@ -18,7 +18,7 @@
   </ng-container>
   <ng-container matColumnDef="datatime">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by message"> Date </th>
-    <td mat-cell *matCellDef="let element"> {{element.datatime | date: 'dd/MM/yyyy'}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.datetime | date: 'dd/MM/yyyy'}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
