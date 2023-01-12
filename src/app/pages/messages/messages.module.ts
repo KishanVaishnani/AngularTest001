@@ -1,11 +1,11 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MessageRoutingModule } from './message-routing.module';
-import { LayoutComponent } from './message-layout/messge-layout.component';
-import { MessageListComponent } from './message-list/message-list.component';
+import { MessageRoutingModule } from './messages-routing.module';
+import { LayoutComponent } from './messages-layout/messges-layout.component';
+import { MessageListComponent } from './messages-list/messages-list.component';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
-import { MessageAddComponent } from './message-add/message-add.component';
+import { MessageAddComponent } from './messages-add/messages-add.component';
 import { MessageServiceService } from 'src/app/shared/services/message-service.service';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';

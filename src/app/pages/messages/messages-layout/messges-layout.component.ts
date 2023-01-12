@@ -3,14 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Subject, takeUntil } from 'rxjs';
 import { MessageData } from 'src/app/shared/models/message';
-import { MessageAddComponent } from '../message-add/message-add.component';
+import { MessageAddComponent } from '../messages-add/messages-add.component';
 import * as fromRoot from 'src/app/store';
 import { MatSnackBar, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-message-layout',
-  templateUrl: './messge-layout.component.html',
-  styleUrls: ['./messge-layout.component.scss'],
+  selector: 'app-messages-layout',
+  templateUrl: './messges-layout.component.html',
+  styleUrls: ['./messges-layout.component.scss'],
 })
 export class LayoutComponent {
   destroy$: Subject<boolean> = new Subject<boolean>();

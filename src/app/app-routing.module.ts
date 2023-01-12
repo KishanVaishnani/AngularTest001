@@ -16,9 +16,9 @@ const routes: Routes = [
         data: { name: 'Home' },
       },
       {
-        path: 'message',
+        path: 'messages',
         loadChildren: () =>
-          import('./pages/message/message.module').then(
+          import('./pages/messages/messages.module').then(
             (m) => m.MessageModule
           ),
         data: { name: 'Message' },

@@ -7,9 +7,9 @@ import { MessageServiceService } from 'src/app/shared/services/message-service.s
 import * as fromRoot from 'src/app/store';
 import { getMessages } from 'src/app/store/actions/app.actions';
 @Component({
-  selector: 'app-message-list',
-  templateUrl: './message-list.component.html',
-  styleUrls: ['./message-list.component.scss'],
+  selector: 'app-messages-list',
+  templateUrl: './messages-list.component.html',
+  styleUrls: ['./messages-list.component.scss'],
 })
 export class MessageListComponent {
   dataSource: any = [];

@@ -11,9 +11,9 @@ import { addMessage } from 'src/app/store/actions/app.actions';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-message-add',
-  templateUrl: './message-add.component.html',
-  styleUrls: ['./message-add.component.scss'],
+  selector: 'app-messages-add',
+  templateUrl: './messages-add.component.html',
+  styleUrls: ['./messages-add.component.scss'],
 })
 export class MessageAddComponent {
   isFormSubmitting = false;
